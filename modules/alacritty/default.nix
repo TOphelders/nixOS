@@ -6,7 +6,7 @@
 
     settings = {
       colors = (import ./colors.nix).oxide;
-      font = (import ./fonts.nix).fantasque-sans-mono;
+      font = (import ./fonts.nix).roboto-mono;
       env = {
         TERM = "alacritty";
       };

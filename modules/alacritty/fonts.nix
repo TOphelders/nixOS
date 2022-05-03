@@ -1,19 +1,19 @@
 {
-  fantasque-sans-mono = {
+  roboto-mono = {
     bold = {
-      family = "Fantasque Sans Mono";
+      family = "Roboto Mono";
       style = "Bold";
     };
     bold_italic = {
-      family = "Fantasque Sans Mono";
+      family = "Roboto Mono";
       style = "Bold Italic";
     };
     italic = {
-      family = "Fantasque Sans Mono";
+      family = "Roboto Mono";
       style = "Italic";
     };
     normal = {
-      family = "Fantasque Sans Mono";
+      family = "Roboto Mono";
       style = "Regular";
     };
   };

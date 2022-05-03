@@ -90,19 +90,23 @@
     fontconfig = {
       enable = true;
     };
-    fonts = [ pkgs.fantasque-sans-mono ];
+    fonts = [ pkgs.roboto-mono ];
   };
 
   environment.systemPackages = with pkgs; [
     curl
     git
     j2cli
+    silver-searcher
+    unzip
+    wget
+
     kind
     kubectl
     kubernetes-helm
+
     nodejs
-    unzip
-    wget
+    yarn
   ];
 
   # This value determines the NixOS release from which the default

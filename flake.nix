@@ -85,6 +85,11 @@
             home-manager.backupFileExtension = "hm-backup";
             home-manager.users.trevor = import ./hosts/home.nix;
             home-manager.extraSpecialArgs = specialArgs;
+
+            home-manager.users.root.programs.git = {
+              enable = true;
+              extraConfig.safe.directory = "/home/trevor/src/nixOS";
+            };
           }
         ];
       in
