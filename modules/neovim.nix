@@ -87,17 +87,38 @@ in
 
       extraConfig = ''
         set foldmethod=indent
-        set expandtab
-        set tabstop=2
         set laststatus=2
-        set shiftwidth=2
+        set foldlevelstart=99
+
+        "Better searching
+        set hlsearch
         set ignorecase
         set smartcase
-        set foldlevelstart=99
+        nnoremap <silent><CR> :noh<CR><CR>
+
+        "Line display
+        set number
+        set ruler
+
+        "Tab completion
+        set wildmenu
+        set wildmode=longest:full,full
+
+        "Indent/word wrap settings
+        set shiftwidth=2
+        set tabstop=2
+        set autoindent
+        set expandtab
+        set showbreak=↪
+
+        " Statuslilne
         set statusline+=\ %f\ %m%=\ %y\ %q\ %3l:%2c\ \|%3p%%\ 
+
+        "Lua Config
+        lua <<EOF
+
         -- Treesitter
         require'nvim-treesitter.configs'.setup {
-          ensure_installed = {},
           highlight = {
             enable = true,
             disable = {"haskell","nix"},
@@ -105,9 +126,10 @@ in
           incremental_selection = {
             enable = true,
             keymaps = {
-              init_selection = "<C-n>",
-              node_incremental = "<C-w>",
-              node_decremental = "<A-w>",
+              init_selection = "gnn",
+              node_incremental = "grn",
+              scope_incremental = "grc",
+              node_decremental = "grm",
             },
           },
           indent = {
@@ -115,21 +137,29 @@ in
             disable = {"haskell","nix"},
           }
         }
+
         EOF
       '';
 
       plugins = with pkgs.vimPlugins; [
         # Syntax
         haskell-vim
-	rust-vim
-	typescript-vim
-	vim-javascript
+        rust-vim
+        typescript-vim
+        vim-javascript
         vim-jsx-pretty
         vim-jsx-typescript
         vim-nix
 
+        # Statusline
+        vim-airline
+
+        # File Searching
+        ctrlp-vim
+        nerdtree
+
         (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
-	coc-nvim
+        coc-nvim
       ];
     };
   };

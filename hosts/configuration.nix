@@ -100,6 +100,7 @@
     kind
     kubectl
     kubernetes-helm
+    nodejs
     unzip
     wget
   ];
