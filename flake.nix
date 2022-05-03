@@ -20,14 +20,14 @@
 
   outputs = {
     self,
+    nixpkgs,
+    home-manager,
     stable,
     unstable,
     neovim-nightly-overlay,
-    k9s,
-  };
-
+    k9s
+  }:
   let
-
     pkgsCompat = import unstable {
       system = "x86_64-linux";
     };
@@ -37,7 +37,7 @@
     };
 
     specialArgs = {
-      inherit home-manager
+      inherit home-manager;
     };
 
     homeConfigurations = {
@@ -53,7 +53,7 @@
           {
             imports = [
               {
-                nixpkgs.overlays = overlays ++ [
+                nixpkgs.overlays = [
                   neovim-nightly-overlay.overlay
                   (self: super: rec { alacritty = pkgsCompat.alacritty; })
                 ];
@@ -73,10 +73,9 @@
         system = "x86_64-linux";
 
         modules = [
-          ./hosts/nixos/configuration.nix
+          ./hosts/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = overlays ++ [ neovim-nightly-overlay.overlay ];
             nixpkgs.config = {
               allowUnfree = true;
             };
@@ -84,7 +83,7 @@
             home-manager.useUserPackages = false;
             home-manager.verbose = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.tifa = import ./hosts/nixos/home.nix;
+            home-manager.users.trevor = import ./hosts/home.nix;
             home-manager.extraSpecialArgs = specialArgs;
           }
         ];

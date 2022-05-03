@@ -121,10 +121,15 @@ in
       plugins = with pkgs.vimPlugins; [
         # Syntax
         haskell-vim
-        pkgs.vim-js
+	rust-vim
+	typescript-vim
+	vim-javascript
         vim-jsx-pretty
+        vim-jsx-typescript
         vim-nix
+
         (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
+	coc-nvim
       ];
     };
   };

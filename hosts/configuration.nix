@@ -86,6 +86,13 @@
     vmware.guest.enable = true;
   };
 
+  fonts = {
+    fontconfig = {
+      enable = true;
+    };
+    fonts = [ pkgs.fantasque-sans-mono ];
+  };
+
   environment.systemPackages = with pkgs; [
     curl
     git
