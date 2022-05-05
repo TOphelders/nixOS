@@ -5,8 +5,9 @@
     enable = true;
 
     functions = {
-      fish_greeting = {
+      mount_shared = {
         body = ''
+          vmhgfs-fuse .host:/Shared /home/trevor/shared -o subtype=vmhgfs-fuse
         '';
       };
     };

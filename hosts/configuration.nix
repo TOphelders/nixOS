@@ -13,16 +13,24 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "nodev";
 
-  networking.hostName = "nixos"; # Define your hostname.
-
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.ens33.useDHCP = true;
+  # networking.useDHCP = false;
+  # networking.interfaces.ens33.useDHCP = true;
+
+  networking.hostName = "nixos"; # Define your hostname.
+
+  networking.interfaces.ens33.ipv4.addresses = [{
+    address = "10.0.0.251";
+    prefixLength = 24;
+  }];
+
+  networking.defaultGateway = "10.0.0.1";
+  networking.nameservers = [ "8.8.8.8" ];
 
   # Enable sound.
   sound.enable = true;
@@ -79,7 +87,7 @@
 
     containers.registries = {
       search = ["docker.io"];
-      insecure = ["localhost:5000"];
+      insecure = ["localhost:5000" "127.0.0.1:5000"];
       block = [];
     };
 
@@ -96,7 +104,9 @@
   environment.systemPackages = with pkgs; [
     curl
     git
+    jq
     j2cli
+    openssl
     silver-searcher
     unzip
     wget
@@ -107,6 +117,8 @@
 
     nodejs
     yarn
+
+    python310
   ];
 
   # This value determines the NixOS release from which the default
