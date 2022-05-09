@@ -159,7 +159,29 @@ in
             close_command = "bdelete! %d",
             right_mouse_command = nil,
             left_mouse_command = "buffer %d",
-            middle_mouse_command = "bdelete! %d"
+            middle_mouse_command = "bdelete! %d",
+
+            color_icons = true,
+            show_buffer_close_icons = true,
+            show_buffer_default_icon = true,
+            show_close_icon = true,
+            separator_style = "slant",
+
+            diagnostics = "coc",
+
+            -- buffer_id | ordinal
+            numbers = function(opts)
+              return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
+            end,
+
+            offsets = {
+              {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                highlight = "Directory",
+                text_align = "left"
+              }
+            }
           }
         }
 
