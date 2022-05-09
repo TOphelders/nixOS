@@ -116,6 +116,16 @@ in
 
         " Statuslilne
         set statusline+=\ %f\ %m%=\ %y\ %q\ %3l:%2c\ \|%3p%%\ 
+        
+        " Bufferline Mapping
+        " These commands will navigate through buffers in order regardless of which mode you are using
+        " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+        nnoremap <silent>[b :BufferLineCycleNext<CR>
+        nnoremap <silent>b] :BufferLineCyclePrev<CR>
+
+        " These commands will sort buffers by directory, language, or a custom criteria
+        nnoremap <silent>be :BufferLineSortByExtension<CR>
+        nnoremap <silent>bd :BufferLineSortByDirectory<CR>
 
         "Lua Config
         lua <<EOF
@@ -138,6 +148,18 @@ in
           indent = {
             enable = true,
             disable = {"haskell","nix"},
+          }
+        }
+
+        -- Bufferline
+        vim.opt.termguicolors = true
+        require("bufferline").setup{
+          options = {
+            mode = "buffers",
+            close_command = "bdelete! %d",
+            right_mouse_command = nil,
+            left_mouse_command = "buffer %d",
+            middle_mouse_command = "bdelete! %d"
           }
         }
 
