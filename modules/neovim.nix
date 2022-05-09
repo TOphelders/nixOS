@@ -96,6 +96,9 @@ in
         set smartcase
         nnoremap <silent><CR> :noh<CR><CR>
 
+        "NERDTree config
+        nmap <F6> :NERDTreeToggle<CR>
+
         "Line display
         set number
         set ruler
@@ -153,6 +156,9 @@ in
 
         # Statusline
         vim-airline
+
+        # Buffers
+        bufferline-nvim
 
         # File Searching
         ctrlp-vim
