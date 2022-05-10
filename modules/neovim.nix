@@ -8,6 +8,11 @@ let
     mapAttrs'
       (key: value: nameValuePair "nvim/after/ftplugin/${key}.vim" ({ text = value; }))
       ftplugins;
+
+  cocConfig = {
+    "coc.preferences.colorSupport" = true;
+  };
+
 in
 {
   config = {
@@ -80,15 +85,22 @@ in
       '';
     };
 
+    # xdg.configFile."nvim/coc-settings.json".source = pkgs.writeTextFile {
+    #   name = "coc-settings.json";
+    #   text = (builtins.toJSON cocConfig);
+    # };
+
     programs.neovim = {
       enable = true;
       vimAlias = true;
       viAlias = true;
+      withPython3 = true;
 
       extraConfig = ''
         set foldmethod=indent
         set laststatus=2
         set foldlevelstart=99
+        set termguicolors
 
         "Better searching
         set hlsearch
@@ -106,6 +118,14 @@ in
         "Tab completion
         set wildmenu
         set wildmode=longest:full,full
+
+        "Highlight colours
+        highlight Visual guifg=NONE guibg=blue
+        highlight Pmenu guibg=black guifg=magenta
+        highlight PmenuSel guibg=black guifg=white gui=underline
+        highlight SignColumn guibg=none
+        highlight CocUnderline gui=underline
+        highlight Conceal guifg=none gui=underline,bold,italic guibg=none
 
         "Indent/word wrap settings
         set shiftwidth=2
@@ -152,7 +172,6 @@ in
         }
 
         -- Bufferline
-        vim.opt.termguicolors = true
         require("bufferline").setup{
           options = {
             mode = "buffers",
@@ -208,8 +227,11 @@ in
         ctrlp-vim
         nerdtree
 
+        # Syntax
         (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
         coc-nvim
+        coc-tsserver
+        coc-highlight
       ];
     };
   };
