@@ -9,10 +9,6 @@ let
       (key: value: nameValuePair "nvim/after/ftplugin/${key}.vim" ({ text = value; }))
       ftplugins;
 
-  cocConfig = {
-    "coc.preferences.colorSupport" = true;
-  };
-
 in
 {
   config = {
@@ -46,6 +42,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
+        set filetype=typescriptreact
       '';
       typescript = ''
         setl formatexpr=
@@ -55,6 +52,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
+        set filetype=typescriptreact
       '';
       css = ''
         setl formatprg=prettier\ --parser\ css\ --stdin-filepath\ %
@@ -85,16 +83,18 @@ in
       '';
     };
 
-    # xdg.configFile."nvim/coc-settings.json".source = pkgs.writeTextFile {
-    #   name = "coc-settings.json";
-    #   text = (builtins.toJSON cocConfig);
-    # };
-
     programs.neovim = {
       enable = true;
       vimAlias = true;
       viAlias = true;
+      withNodeJs = true;
       withPython3 = true;
+
+      coc.enable = true;
+      coc.settings = {
+        "preferences.colorSupport" = true;
+        "diagnostics.enable" = false;
+      };
 
       extraConfig = ''
         set foldmethod=indent
@@ -146,6 +146,9 @@ in
         " These commands will sort buffers by directory, language, or a custom criteria
         nnoremap <silent>be :BufferLineSortByExtension<CR>
         nnoremap <silent>bd :BufferLineSortByDirectory<CR>
+
+        " Coc Settings
+        command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
         "Lua Config
         lua <<EOF
@@ -229,9 +232,10 @@ in
 
         # Syntax
         (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
-        coc-nvim
-        coc-tsserver
+        coc-eslint
         coc-highlight
+        coc-tsserver
+        coc-prettier
       ];
     };
   };
