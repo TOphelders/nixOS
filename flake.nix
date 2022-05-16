@@ -12,7 +12,7 @@
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "unstable";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     k9s.url = "github:derailed/k9s";
     k9s.flake = false;
@@ -24,7 +24,7 @@
     home-manager,
     stable,
     unstable,
-    neovim-nightly-overlay,
+    # neovim-nightly-overlay,
     k9s
   }:
   let
@@ -33,7 +33,7 @@
     };
 
     pkgsStable = import stable {
-      system = "x86_64-linux";
+      system = "aarch64-darwin";
     };
 
     specialArgs = {
@@ -41,28 +41,32 @@
     };
 
     homeConfigurations = {
-      vm = home-manager.lib.homeManagerConfiguration rec {
-        system = "x86_64-linux";
+      mac = home-manager.lib.homeManagerConfiguration rec {
+        system = "aarch64-darwin";
         extraSpecialArgs = specialArgs;
         pkgs = import unstable {
           inherit system;
         };
-        homeDirectory = "/home/trevor";
+        homeDirectory = "/Users/trevor";
         username = "trevor";
         configuration = { pkgs, config, ... }:
           {
             imports = [
               {
                 nixpkgs.overlays = [
-                  neovim-nightly-overlay.overlay
-                  (self: super: rec { alacritty = pkgsCompat.alacritty; })
+                  # neovim-nightly-overlay.overlay
                 ];
 
                 nixpkgs.config = {
                   allowUnfree = true;
+                  packageOverrides = super: let self = super.pkgs; in {
+                    roboto-mono = self.nerdfonts.override {
+                      fonts = [ "RobotoMono" ];
+                    };
+                  };
                 };
               }
-              ./hosts/home.nix
+              ./hosts/mac/home.nix
             ];
           };
       };
@@ -73,7 +77,7 @@
         system = "x86_64-linux";
 
         modules = [
-          ./hosts/configuration.nix
+          ./hosts/desktop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config = {
@@ -83,7 +87,7 @@
             home-manager.useUserPackages = false;
             home-manager.verbose = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.trevor = import ./hosts/home.nix;
+            home-manager.users.trevor = import ./hosts/desktop/home.nix;
             home-manager.extraSpecialArgs = specialArgs;
 
             home-manager.users.root.programs.git = {
