@@ -2,6 +2,7 @@
 
 {
   imports = [
+    (import ../../modules/common.nix)
     (import ../../modules/git.nix)
     (import ../../modules/fish.nix)
     (import ../../modules/neovim.nix)
@@ -21,25 +22,5 @@
     nixFlakes
     unixtools.watch
     home-manager.defaultPackage.aarch64-darwin
-
-    curl
-    git
-    jq
-    j2cli
-    openssl
-    silver-searcher
-    unzip
-    wget
-
-    kind
-    kubectl
-    kubernetes-helm
-
-    nodejs
-    yarn
-
-    python310
-
-    roboto-mono
   ];
 }

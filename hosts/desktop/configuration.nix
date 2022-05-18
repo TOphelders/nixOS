@@ -102,23 +102,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    curl
-    git
-    jq
-    j2cli
-    openssl
-    silver-searcher
-    unzip
-    wget
-
-    kind
-    kubectl
-    kubernetes-helm
-
-    nodejs
-    yarn
-
-    python310
   ];
 
   # This value determines the NixOS release from which the default

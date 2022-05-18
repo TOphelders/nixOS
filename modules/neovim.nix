@@ -101,6 +101,7 @@ in
         set laststatus=2
         set foldlevelstart=99
         set termguicolors
+        set mouse=n
 
         "Better searching
         set hlsearch
@@ -108,12 +109,15 @@ in
         set smartcase
         nnoremap <silent><CR> :noh<CR><CR>
 
-        "NERDTree config
-        nmap <F6> :NERDTreeToggle<CR>
-
         "Line display
         set number
         set ruler
+
+        "Term specific settings
+        autocmd TermOpen * setlocal nonumber norelativenumber
+
+        "Copy paste
+        set clipboard=unnamed
 
         "Tab completion
         set wildmenu
@@ -134,24 +138,36 @@ in
         set expandtab
         set showbreak=↪
 
-        " Statuslilne
-        set statusline+=\ %f\ %m%=\ %y\ %q\ %3l:%2c\ \|%3p%%\ 
-        
-        " Bufferline Mapping
-        " These commands will navigate through buffers in order regardless of which mode you are using
-        " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+        "Nvim Tree
+        nmap <F6> :NvimTreeToggle<CR>
+
+        "Airline
+        let g:airline_powerline_fonts = 1
+        let g:airline#extensions#coc#enabled = 1
+        let g:airline#extensions#coc#show_coc_status = 1
+
+        "Bufferline Mapping
+        "These commands will navigate through buffers in order regardless of which mode you are using
+        "e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
         nnoremap <silent>[b :BufferLineCycleNext<CR>
         nnoremap <silent>b] :BufferLineCyclePrev<CR>
 
-        " These commands will sort buffers by directory, language, or a custom criteria
+        "These commands will sort buffers by directory, language, or a custom criteria
         nnoremap <silent>be :BufferLineSortByExtension<CR>
         nnoremap <silent>bd :BufferLineSortByDirectory<CR>
 
-        " Coc Settings
+        "Coc Settings
         command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
         "Lua Config
         lua <<EOF
+
+        -- Nvim Tree
+        require'nvim-tree'.setup {
+          filters = {
+            dotfiles = true,
+          },
+        }
 
         -- Treesitter
         require'nvim-treesitter.configs'.setup {
@@ -175,7 +191,7 @@ in
         }
 
         -- Bufferline
-        require("bufferline").setup{
+        require'bufferline'.setup {
           options = {
             mode = "buffers",
             close_command = "bdelete! %d",
@@ -184,10 +200,11 @@ in
             middle_mouse_command = "bdelete! %d",
 
             color_icons = true,
+            show_buffer_icons = true,
             show_buffer_close_icons = true,
             show_buffer_default_icon = true,
             show_close_icon = true,
-            separator_style = "slant",
+            separator_style = "padded_slant",
 
             diagnostics = "coc",
 
@@ -228,7 +245,11 @@ in
 
         # File Searching
         ctrlp-vim
-        nerdtree
+        nvim-tree-lua
+
+        # Git
+        coc-git
+        vim-fugitive
 
         # Syntax
         (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
