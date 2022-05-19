@@ -24,6 +24,7 @@ in
         setl makeprg=cargo\ check
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
+        TagbarOpen
       '';
       json = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -42,7 +43,16 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        set filetype=typescriptreact
+        TagbarOpen
+      '';
+      javascriptreact = ''
+        setl formatprg=prettier\ --stdin-filepath\ %
+        setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
+        setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
+        setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+        TagbarOpen
       '';
       typescript = ''
         setl formatexpr=
@@ -52,7 +62,17 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        set filetype=typescriptreact
+        TagbarOpen
+      '';
+      typescriptreact = ''
+        setl formatexpr=
+        setl formatprg=prettier\ --parser\ typescript\ --stdin-filepath\ %
+        setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
+        setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
+        setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+        TagbarOpen
       '';
       css = ''
         setl formatprg=prettier\ --parser\ css\ --stdin-filepath\ %
@@ -71,6 +91,7 @@ in
       python = ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
+        TagbarOpen
       '';
       sql = ''
         setl formatprg=${pkgs.pgformatter}/bin/pg_format
@@ -139,7 +160,28 @@ in
         set showbreak=↪
 
         "Nvim Tree
+        autocmd VimEnter * NvimTreeOpen
+        autocmd VimEnter * wincmd p
         nmap <F6> :NvimTreeToggle<CR>
+
+        "Tagbar
+        nmap <F7> :TagbarToggle<CR>
+        let g:tagbar_type_typescriptreact = {
+          \ 'ctagstype' : 'typescript',
+          \ 'kinds'     : [
+            \ 'n:namespaces',
+            \ 'i:interfaces',
+            \ 'g:enums',
+            \ 'e:enumerations',
+            \ 'c:classes',
+            \ 'C:constants',
+            \ 'f:functions',
+            \ 'p:properties',
+            \ 'v:variables',
+            \ 'm:methods',
+            \ '?:unknown',
+          \ ],
+        \ }
 
         "Airline
         let g:airline_powerline_fonts = 1
@@ -246,6 +288,7 @@ in
         # File Searching
         ctrlp-vim
         nvim-tree-lua
+        tagbar
 
         # Git
         coc-git
@@ -256,6 +299,7 @@ in
         coc-eslint
         coc-highlight
         coc-tsserver
+        coc-pairs
         coc-prettier
       ];
     };

@@ -10,6 +10,7 @@ with pkgs;
     j2cli
     openssl
     silver-searcher
+    universal-ctags
     unzip
     wget
 
