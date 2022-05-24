@@ -129,6 +129,18 @@ in
         set ignorecase
         set smartcase
         nnoremap <silent><CR> :noh<CR><CR>
+        nmap <silent> gd <Plug>(coc-definition)
+
+        " Use K to show documentation in preview window
+        nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+        function! s:show_documentation()
+          if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+          else
+            call CocAction('doHover')
+          endif
+        endfunction
 
         "Line display
         set number
@@ -158,6 +170,9 @@ in
         set autoindent
         set expandtab
         set showbreak=↪
+
+        "Delete buffers without closing window
+        command! Bd bp|bd #
 
         "Nvim Tree
         autocmd VimEnter * NvimTreeOpen
@@ -206,8 +221,13 @@ in
 
         -- Nvim Tree
         require'nvim-tree'.setup {
-          filters = {
-            dotfiles = true,
+          view = {
+            width = 45,
+          },
+          update_focused_file = {
+            enable = true,
+            update_cwd = false,
+            ignore_list = {},
           },
         }
 
