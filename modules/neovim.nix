@@ -115,6 +115,7 @@ in
       coc.settings = {
         "preferences.colorSupport" = true;
         "diagnostics.enable" = false;
+        "rust-client.disableRustup" = true;
       };
 
       extraConfig = ''
@@ -319,6 +320,7 @@ in
         coc-eslint
         coc-highlight
         coc-tsserver
+        coc-rls
         coc-pairs
         coc-prettier
       ];

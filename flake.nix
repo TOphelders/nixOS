@@ -12,7 +12,7 @@
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "unstable";
 
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    rust-overlay.url = "github:oxalica/rust-overlay";
 
     k9s.url = "github:derailed/k9s";
     k9s.flake = false;
@@ -24,7 +24,7 @@
     home-manager,
     stable,
     unstable,
-    # neovim-nightly-overlay,
+    rust-overlay,
     k9s
   }:
   let
@@ -54,7 +54,7 @@
             imports = [
               {
                 nixpkgs.overlays = [
-                  # neovim-nightly-overlay.overlay
+                  rust-overlay.overlay
                 ];
 
                 nixpkgs.config = {

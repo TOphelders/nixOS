@@ -6,6 +6,7 @@
     (import ../../modules/git.nix)
     (import ../../modules/fish.nix)
     (import ../../modules/neovim.nix)
+    (import ../../modules/rust.nix)
   ];
 
   programs.man.enable = true;
