@@ -24,7 +24,7 @@ in
         setl makeprg=cargo\ check
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       json = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -43,7 +43,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       javascriptreact = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -52,7 +52,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       typescript = ''
         setl formatexpr=
@@ -62,7 +62,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       typescriptreact = ''
         setl formatexpr=
@@ -72,7 +72,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       css = ''
         setl formatprg=prettier\ --parser\ css\ --stdin-filepath\ %
@@ -91,7 +91,7 @@ in
       python = ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        TagbarOpen
+        Vista Coc
       '';
       sql = ''
         setl formatprg=${pkgs.pgformatter}/bin/pg_format
@@ -181,32 +181,7 @@ in
         nmap <F6> :NvimTreeToggle<CR>
 
         "Tagbar
-        nmap <F7> :TagbarToggle<CR>
-        let g:tagbar_type_typescriptreact = {
-          \ 'kinds': [
-            \ 'c:class',
-            \ 'n:namespace',
-            \ 'f:function',
-            \ 'G:generator',
-            \ 'v:variable',
-            \ 'm:method',
-            \ 'p:property',
-            \ 'i:interface',
-            \ 'g:enum',
-            \ 't:type',
-            \ 'a:alias',
-          \ ],
-          \'sro': '.',
-            \ 'kind2scope' : {
-            \ 'c' : 'class',
-            \ 'n' : 'namespace',
-            \ 'i' : 'interface',
-            \ 'f' : 'function',
-            \ 'G' : 'generator',
-            \ 'm' : 'method',
-            \ 'p' : 'property',
-            \},
-        \ }
+        nmap <F7> :Vista!!<CR>
 
         "Airline
         let g:airline_powerline_fonts = 1
@@ -318,7 +293,7 @@ in
         # File Searching
         ctrlp-vim
         nvim-tree-lua
-        tagbar
+        vista-vim
 
         # Git
         coc-git
