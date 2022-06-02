@@ -17,6 +17,19 @@
     keep-outputs = true
   '';
 
+  home.file = {
+    ".ctags.d/tsx.ctags" = {
+      text = ''
+        --exclude=*.git*
+        --exclude=.DS_Store
+        --exclude=node_modules
+
+        --langmap=JavaScript:+.ts.tsx
+      '';
+      recursive = true;
+    };
+  };
+
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
