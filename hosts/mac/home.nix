@@ -11,6 +11,11 @@
 
   programs.man.enable = true;
 
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   xdg.configFile."nix/nix.conf".text = ''
     experimental-features = nix-command flakes
     keep-derivations = true

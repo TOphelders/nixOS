@@ -24,7 +24,7 @@ in
         setl makeprg=cargo\ check
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       json = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -43,7 +43,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       javascriptreact = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -52,7 +52,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       typescript = ''
         setl formatexpr=
@@ -62,7 +62,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       typescriptreact = ''
         setl formatexpr=
@@ -72,7 +72,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       css = ''
         setl formatprg=prettier\ --parser\ css\ --stdin-filepath\ %
@@ -91,7 +91,7 @@ in
       python = ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista Coc
+        Vista
       '';
       sql = ''
         setl formatprg=${pkgs.pgformatter}/bin/pg_format
@@ -116,6 +116,7 @@ in
         "preferences.colorSupport" = true;
         "diagnostics.enable" = false;
         "rust-client.disableRustup" = true;
+        "suggest.enablePreselect" = false;
       };
 
       extraConfig = ''
@@ -180,8 +181,14 @@ in
         autocmd VimEnter * wincmd p
         nmap <F6> :NvimTreeToggle<CR>
 
-        "Tagbar
+        "FZF
+        nmap <C-P> :FZF<CR>
+
+        "Vista
         nmap <F7> :Vista!!<CR>
+        let g:vista_sidebar_width = 40
+        let g:vista_stay_on_open = 0
+        let g:vista_default_executive = 'coc'
 
         "Airline
         let g:airline_powerline_fonts = 1
@@ -291,7 +298,8 @@ in
         bufferline-nvim
 
         # File Searching
-        ctrlp-vim
+        coc-fzf
+        fzf-vim
         nvim-tree-lua
         vista-vim
 
