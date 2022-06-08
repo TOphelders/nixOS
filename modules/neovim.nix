@@ -117,6 +117,10 @@ in
         "diagnostics.enable" = false;
         "rust-client.disableRustup" = true;
         "suggest.enablePreselect" = false;
+        "python.formatting.provider" = "black";
+        "python.jediEnabled" = true;
+        "python.flake8Enabled" = true;
+        "python.pythonPath" = "nvim-python3";
       };
 
       extraConfig = ''
@@ -317,6 +321,12 @@ in
         coc-prettier
         coc-python
       ];
+
+      extraPython3Packages = (ps: with ps; [
+        black
+        jedi
+        flake8
+      ]);
     };
   };
 }
