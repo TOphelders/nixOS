@@ -283,6 +283,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         # Syntax
+        (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
         haskell-vim
         rust-vim
         typescript-vim
@@ -304,17 +305,17 @@ in
         vista-vim
 
         # Git
-        coc-git
         vim-fugitive
 
-        # Syntax
-        (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
+        # Coc
         coc-eslint
+        coc-git
         coc-highlight
         coc-tsserver
         coc-rls
         coc-pairs
         coc-prettier
+        coc-python
       ];
     };
   };

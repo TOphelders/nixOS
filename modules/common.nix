@@ -22,6 +22,7 @@ with pkgs;
     yarn
 
     python310
+    python310Packages.pylint
 
     roboto-mono
   ];

@@ -9,6 +9,7 @@ let
 in 
 {
   home.packages = [
+    pkgs.dbmate
     rust
   ];
 }
