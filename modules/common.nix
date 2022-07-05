@@ -16,7 +16,11 @@ with pkgs;
 
     kind
     kubectl
+    kubectx
     kubernetes-helm
+
+    google-cloud-sdk
+    terraform
 
     nodejs
     yarn

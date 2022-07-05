@@ -24,7 +24,7 @@ in
         setl makeprg=cargo\ check
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       json = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -43,7 +43,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       javascriptreact = ''
         setl formatprg=prettier\ --stdin-filepath\ %
@@ -52,7 +52,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       typescript = ''
         setl formatexpr=
@@ -62,7 +62,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       typescriptreact = ''
         setl formatexpr=
@@ -72,7 +72,7 @@ in
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       css = ''
         setl formatprg=prettier\ --parser\ css\ --stdin-filepath\ %
@@ -91,7 +91,7 @@ in
       python = ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
-        Vista
+        "Vista
       '';
       sql = ''
         setl formatprg=${pkgs.pgformatter}/bin/pg_format
@@ -319,7 +319,7 @@ in
         coc-rls
         coc-pairs
         coc-prettier
-        coc-python
+        coc-pyright
       ];
 
       extraPython3Packages = (ps: with ps; [
