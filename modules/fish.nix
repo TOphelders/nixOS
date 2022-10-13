@@ -7,13 +7,15 @@ let
     contains "/Users/trevor/.nix-profile/share/man" $MANPATH
     or set -p MANPATH "/Users/trevor/.nix-profile/share/man"
 
+    fish_add_path ~/.cargo/bin
+
+    # kube
+    kubectl completion fish | source
+
     # nix
     if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     end
-
-    # kube
-    kubectl completion fish | source
   '';
 
 in
@@ -21,11 +23,12 @@ in
   programs.fish = {
     enable = true;
 
-    interactiveShellInit = fishConfig;
+    shellInit = fishConfig;
 
     functions = {
-      mount_shared = {
+      kubectl-complete = {
         body = ''
+          kubectl completion fish | source
         '';
       };
     };
