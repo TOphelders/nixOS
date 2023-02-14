@@ -50,7 +50,7 @@
           ./hosts/mac/home.nix
           {
             nixpkgs.overlays = [
-              rust-overlay.overlay
+              rust-overlay.overlays.default
             ];
 
             nixpkgs.config = {

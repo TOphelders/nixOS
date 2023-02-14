@@ -129,6 +129,10 @@ in
         set foldlevelstart=99
         set termguicolors
         set mouse=n
+        set background=dark
+
+        "colorscheme
+        colorscheme sonokai
 
         "Better searching
         set hlsearch
@@ -228,10 +232,36 @@ in
         }
 
         -- Treesitter
+        -- Defines a read-write directory for treesitters in nvim's cache dir
+        local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
+        vim.fn.mkdir(parser_install_dir, "p")
+        vim.opt.runtimepath:append(parser_install_dir)
+
         require'nvim-treesitter.configs'.setup {
           highlight = {
             enable = true,
             disable = {"haskell","nix"},
+          },
+          ensure_installed = {
+            "javascript",
+            "typescript",
+            "tsx",
+            "lua",
+            "c",
+            "cpp",
+            "make",
+            "cmake",
+            "python",
+            "json",
+            "jsonc",
+            "yaml",
+            "css",
+            "scss",
+            "ruby",
+            "html",
+            "help",
+            "markdown",
+            "vim",
           },
           incremental_selection = {
             enable = true,
@@ -245,7 +275,8 @@ in
           indent = {
             enable = true,
             disable = {"haskell","nix"},
-          }
+          },
+          parser_install_dir = parser_install_dir
         }
 
         -- Bufferline
@@ -320,6 +351,9 @@ in
         coc-pairs
         coc-prettier
         coc-pyright
+
+        # Colors
+        sonokai
       ];
 
       extraPython3Packages = (ps: with ps; [
