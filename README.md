@@ -13,6 +13,15 @@ $ home-manager build --flake .#mac
 $ home-manager switch --flake .#mac
 ```
 
+### Upgrading Nix
+```
+$ nix profile remove 0
+$ sudo nix upgrade nix
+$ nix-store --gc # garbage collect to remove old packages
+$ rm flake.lock
+$ # Proceed to reinstall using the above commands
+```
+
 ## NixOS
 
 `sudo nixos-rebuild switch --flake .`

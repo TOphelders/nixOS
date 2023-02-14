@@ -1,6 +1,10 @@
 { pkgs, home-manager, config, ... }:
 
 {
+  home.username = "trevor";
+  home.homeDirectory = "/Users/trevor";
+  home.stateVersion = "23.05";
+
   imports = [
     (import ../../modules/common.nix)
     (import ../../modules/git.nix)

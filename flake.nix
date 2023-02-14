@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
-    stable.url = "github:NixOS/nixpkgs/nixos-21.11";
+    stable.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "unstable";
@@ -42,33 +42,27 @@
 
     homeConfigurations = {
       mac = home-manager.lib.homeManagerConfiguration rec {
-        system = "aarch64-darwin";
         extraSpecialArgs = specialArgs;
         pkgs = import unstable {
-          inherit system;
+          system = "aarch64-darwin";
         };
-        homeDirectory = "/Users/trevor";
-        username = "trevor";
-        configuration = { pkgs, config, ... }:
+        modules = [
+          ./hosts/mac/home.nix
           {
-            imports = [
-              {
-                nixpkgs.overlays = [
-                  rust-overlay.overlay
-                ];
-
-                nixpkgs.config = {
-                  allowUnfree = true;
-                  packageOverrides = super: let self = super.pkgs; in {
-                    roboto-mono = self.nerdfonts.override {
-                      fonts = [ "RobotoMono" ];
-                    };
-                  };
-                };
-              }
-              ./hosts/mac/home.nix
+            nixpkgs.overlays = [
+              rust-overlay.overlay
             ];
-          };
+
+            nixpkgs.config = {
+              allowUnfree = true;
+              packageOverrides = super: let self = super.pkgs; in {
+                roboto-mono = self.nerdfonts.override {
+                  fonts = [ "RobotoMono" ];
+                };
+              };
+            };
+          }
+        ];
       };
     };
 
