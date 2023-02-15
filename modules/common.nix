@@ -28,5 +28,7 @@ with pkgs;
     python310
 
     roboto-mono
+
+    tree-sitter
   ];
 }

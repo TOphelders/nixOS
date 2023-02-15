@@ -243,25 +243,26 @@ in
             disable = {"haskell","nix"},
           },
           ensure_installed = {
-            "javascript",
-            "typescript",
-            "tsx",
-            "lua",
             "c",
-            "cpp",
-            "make",
+            "lua",
+            "vim",
+            "help",
             "cmake",
+            "typescript",
+            "javascript",
+            "tsx",
+            "rust",
             "python",
-            "json",
-            "jsonc",
-            "yaml",
+            "bash",
+            "fish",
+            "sql",
+            "html",
             "css",
             "scss",
-            "ruby",
-            "html",
-            "help",
             "markdown",
-            "vim",
+            "yaml",
+            "toml",
+            "regex",
           },
           incremental_selection = {
             enable = true,
@@ -318,7 +319,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         # Syntax
-        (nvim-treesitter.withPlugins (p: pkgs.tree-sitter.allGrammars))
+        nvim-treesitter
         haskell-vim
         rust-vim
         typescript-vim
