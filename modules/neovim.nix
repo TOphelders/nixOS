@@ -348,7 +348,7 @@ in
         coc-git
         coc-highlight
         coc-tsserver
-        coc-rls
+        coc-rust-analyzer
         coc-pairs
         coc-prettier
         coc-pyright
