@@ -28,12 +28,12 @@ in
       '';
       json = ''
         setl formatprg=prettier\ --stdin-filepath\ %
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
       '';
       yaml = ''
         setl formatprg=prettier\ --stdin-filepath\ %
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
       '';
       javascript = ''
@@ -41,7 +41,7 @@ in
         setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
         setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
         "Vista
       '';
@@ -50,7 +50,7 @@ in
         setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
         setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
         "Vista
       '';
@@ -60,7 +60,7 @@ in
         setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
         setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
         "Vista
       '';
@@ -70,7 +70,7 @@ in
         setl wildignore+=*node_modules*,package-lock.json,yarn-lock.json
         setl errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
         setl makeprg=${pkgs.nodePackages.eslint}/bin/eslint\ --format\ compact
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
         "Vista
       '';
@@ -82,14 +82,14 @@ in
       '';
       nix = ''
         setl formatprg=nixpkgs-fmt
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
       '';
       make = ''
         setl noexpandtab
       '';
       python = ''
-        set foldmethod=expr
+        set foldmethod=indent
         set foldexpr=nvim_treesitter#foldexpr()
         "Vista
       '';

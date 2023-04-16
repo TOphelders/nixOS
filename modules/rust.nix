@@ -9,7 +9,8 @@ let
 in 
 {
   home.packages = [
-    pkgs.dbmate
+    pkgs.sqlite
+    pkgs.diesel-cli
     rust
   ];
 }
