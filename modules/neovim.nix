@@ -193,7 +193,9 @@ in
         nmap <C-P> :FZF<CR>
 
         "Vista
+        autocmd VimEnter * Vista
         nmap <F7> :Vista!!<CR>
+
         let g:vista_sidebar_width = 40
         let g:vista_stay_on_open = 0
         let g:vista_default_executive = 'coc'
@@ -292,7 +294,6 @@ in
             color_icons = true,
             show_buffer_icons = true,
             show_buffer_close_icons = true,
-            show_buffer_default_icon = true,
             show_close_icon = true,
             separator_style = "padded_slant",
 
@@ -352,6 +353,9 @@ in
         coc-pairs
         coc-prettier
         coc-pyright
+
+        # Fonts
+        nvim-web-devicons
 
         # Colors
         sonokai
