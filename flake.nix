@@ -12,6 +12,8 @@
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "unstable";
 
+    master.url = "github:NixOS/nixpkgs/master";
+
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     k9s.url = "github:derailed/k9s";
@@ -24,6 +26,7 @@
     home-manager,
     stable,
     unstable,
+    master,
     rust-overlay,
     k9s
   }:
@@ -36,8 +39,13 @@
       system = "aarch64-darwin";
     };
 
+    pkgsMaster = import master {
+      system = "aarch64-darwin";
+    };
+
     specialArgs = {
       inherit home-manager;
+      inherit pkgsMaster;
     };
 
     homeConfigurations = {
