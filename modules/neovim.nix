@@ -185,8 +185,8 @@ in
         command! Bd bp|bd #
 
         "Nvim Tree
-        autocmd VimEnter * NvimTreeOpen
-        autocmd VimEnter * wincmd p
+        "autocmd VimEnter * NvimTreeOpen
+        "autocmd VimEnter * wincmd p
         nmap <F6> :NvimTreeToggle<CR>
 
         "FZF

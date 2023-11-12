@@ -123,10 +123,18 @@ in
     (+global-word-wrap-mode +1)
 
     ;; Icons in terminal
-    (after! treemacs
-      (use-package treemacs-nerd-icons
-        :config
-        (treemacs-load-theme "nerd-icons")))
+    (use-package treemacs-nerd-icons
+      :config
+      (treemacs-load-theme "nerd-icons"))
+    (setq doom-themes-treemacs-theme "nerd-icons")
+
+    ;; copilot
+    ;; accept completion from copilot and fallback to company
+    (use-package! copilot
+      :hook (prog-mode . copilot-mode)
+      :bind (:map copilot-completion-map
+                  ("M-y" . 'copilot-accept-completion)
+                  ("M-u" . 'copilot-accept-completion-by-word)))
   '';
 
   xdg.configFile."doom/init.el".text = ''
@@ -380,5 +388,8 @@ in
 
     (package! nerd-icons)
     (package! treemacs-nerd-icons)
+
+    (package! copilot
+      :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
   '';
 }
